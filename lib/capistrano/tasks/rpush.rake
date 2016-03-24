@@ -53,7 +53,7 @@ namespace :rpush do
         end
         within current_path do
           with rack_env: fetch(:rpush_env) do
-            execute :rpush, "start -p #{fecth(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fectch(:rpush_env)}"
+            execute :rpush, "start -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
           end
         end
       end
@@ -67,7 +67,7 @@ namespace :rpush do
         unless  test "[ -f #{fetch(:rpush_conf)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
-              execute :rpush, "status -c #{fetch(:rpush_conf)} -e #{fectch(:rpush_env)}"
+              execute :rpush, "status -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
             end
           end
         end
@@ -82,7 +82,7 @@ namespace :rpush do
         unless  test "[ -f #{fetch(:rpush_pid)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
-              execute :rpush, "stop -p #{fecth(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fectch(:rpush_env)}"
+              execute :rpush, "stop -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
             end
           end
         end
