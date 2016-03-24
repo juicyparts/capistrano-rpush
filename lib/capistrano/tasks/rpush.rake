@@ -2,7 +2,7 @@ namespace :load do
   set :rpush_default_hooks, -> { true }
   set :rpush_role,          :app
   set :rpush_env,           -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
-  set :rpush_conf,          -> { File.join(shared_path, 'config', 'initializers', 'rpush.rb') }
+  set :rpush_conf,          -> { File.join(shared_path, 'config', 'rpush.rb') }
   set :rpush_log,           -> { File.join(shared_path, 'log', 'rpush.log') }
   set :rpush_pid,           -> { File.join(shared_path, 'tmp', 'pids', 'rpush.pid') }
 end
@@ -53,7 +53,7 @@ namespace :rpush do
         end
         within current_path do
           with rack_env: fetch(:rpush_env) do
-            execute :rpush, "start -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
+            execute :bundle, :exec, "rpush start -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
           end
         end
       end
@@ -64,10 +64,10 @@ namespace :rpush do
   task :status do
     on roles (fetch(:rpush_role)) do |role|
       rpush_switch_user(role) do
-        unless  test "[ -f #{fetch(:rpush_conf)} ]"
+        if test "[ -f #{fetch(:rpush_conf)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
-              execute :rpush, "status -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
+              execute :bundle, :exec, "rpush status -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
             end
           end
         end
@@ -82,7 +82,7 @@ namespace :rpush do
         unless  test "[ -f #{fetch(:rpush_pid)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
-              execute :rpush, "stop -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
+              execute :bundle, :exec, "rpush stop -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
             end
           end
         end
