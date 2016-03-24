@@ -79,7 +79,7 @@ namespace :rpush do
   task :stop do
     on roles (fetch(:rpush_role)) do |role|
       rpush_switch_user(role) do
-        unless  test "[ -f #{fetch(:rpush_pid)} ]"
+        if test "[ -f #{fetch(:rpush_pid)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
               execute :bundle, :exec, "rpush stop -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
