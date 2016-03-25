@@ -1,8 +1,30 @@
+[![Gem Version](https://badge.fury.io/rb/capistrano-rpush.svg)](https://badge.fury.io/rb/capistrano-rpush)
+
 # Capistrano::Rpush
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/rpush`. To experiment with that code, run `bin/console` for an interactive prompt.
+[Capistrano::Rpush](https://github.com/juicyparts/capistrano-rpush) adds [Rpush](https://rubygems.org/gems/rpush) tasks to your Capistrano deployment.
 
-TODO: Delete this and the text above, and describe your gem
+## Rpush
+
+This gem was developed against version 2.7.0. Additionally it only provides tasks over a subset of available commands:
+
+    $ rpush --help
+```
+Commands:
+  rpush help [COMMAND]  # Describe available commands or one specific command
+  rpush init            # Initialize Rpush into the current directory
+  rpush push            # Deliver all pending notifications and then exit
+  rpush start           # Start Rpush
+  rpush status          # Show the internal status of the running Rpush instance.
+  rpush stop            # Stop Rpush
+  rpush version         # Print Rpush version
+
+Options:
+  -c, [--config=CONFIG]
+                               # Default: config/initializers/rpush.rb
+  -e, [--rails-env=RAILS-ENV]
+                               # Default: development
+```
 
 ## Installation
 
@@ -22,17 +44,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+  # In Rails.root/Capfile
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+  require 'capistrano/rpush'
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Now you can use cap -T to list tasks:
+
+```
+cap rpush:restart  # Restart rpush
+cap rpush:start    # Start rpush
+cap rpush:status   # Status rpush
+cap rpush:stop     # Stop rpush
+```
+
+### Configuration
+
+The following configurable options are available, and listed with their defaults. Override them to suit your project's needs:
+
+```ruby
+  set :rpush_role, :app
+  set :rpush_env,  -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
+  set :rpush_conf, -> { File.join(shared_path, 'config', 'rpush.rb') }
+  set :rpush_log,  -> { File.join(shared_path, 'log', 'rpush.log') }
+  set :rpush_pid,  -> { File.join(shared_path, 'tmp', 'pids', 'rpush.pid') }
+```
+
+The options assume ```rpush.rb``` is defined in ```linked_files```. They also assume the following directories are listed in ```linked_dirs```:
+
+    tmp/pids log
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/capistrano-rpush. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/juicyparts/capistrano-rpush. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

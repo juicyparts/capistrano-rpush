@@ -22,7 +22,6 @@ namespace :rpush do
 
   task :check do
     on roles (fetch(:rpush_role)) do |role|
-      #Create rpush.rb for new deployments
       unless  test "[ -f #{fetch(:rpush_conf)} ]"
         warn 'rpush.rb NOT FOUND!'
         info 'Configure rpush for your project before attempting a deployment.'
@@ -103,11 +102,10 @@ namespace :rpush do
 
   def rpush_user(role)
     properties = role.properties
-    properties.fetch(:rpush_user) ||               # local property for rpush only
+    properties.fetch(:rpush_user) ||  # local property for rpush only
     fetch(:rpush_user) ||
-    properties.fetch(:run_as) || # global property across multiple capistrano gems
+    properties.fetch(:run_as) ||      # global property across multiple capistrano gems
     role.user
   end
 
 end
-
