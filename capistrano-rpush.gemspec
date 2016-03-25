@@ -19,6 +19,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.post_install_message = "Thanks for installing!"
+  spec.metadata = {
+    "source_code"   => 'https://github.com/juicyparts/capistrano-rpush',
+    "issue_tracker" => "https://github.com/juicyparts/capistrano-rpush/issues",
+  }
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
