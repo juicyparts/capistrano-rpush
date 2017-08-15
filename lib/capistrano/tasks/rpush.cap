@@ -48,6 +48,7 @@ namespace :rpush do
         if test "[ -f #{fetch(:rpush_conf)} ]"
           info "using conf file #{fetch(:rpush_conf)}"
         else
+          Rake::Task["rpush:check"].reenable
           invoke 'rpush:check'
         end
         within current_path do
