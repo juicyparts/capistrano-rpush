@@ -29,5 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
 
   spec.add_dependency 'capistrano', '~> 3.0', '< 4.0'
-  spec.add_dependency 'rpush', '~> 2.7', '< 3.0'
+  spec.add_dependency 'rpush', '>= 2.7'
 end
