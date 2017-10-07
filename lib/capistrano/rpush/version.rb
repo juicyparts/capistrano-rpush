@@ -1,5 +1,5 @@
 module Capistrano
-  module Rpush
+  module RpushPlugin
     VERSION = "0.2.0.pre"
   end
 end

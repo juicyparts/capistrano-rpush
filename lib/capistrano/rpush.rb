@@ -1,1 +1,5 @@
-load File.expand_path('../tasks/rpush.cap', __FILE__)
+require 'capistrano/plugin'
+
+class Capistrano::Rpush < Capistrano::Plugin
+
+end

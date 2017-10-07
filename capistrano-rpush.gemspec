@@ -5,7 +5,7 @@ require 'capistrano/rpush/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'capistrano-rpush'
-  spec.version       = Capistrano::Rpush::VERSION
+  spec.version       = Capistrano::RpushPlugin::VERSION
   spec.authors       = ['Mel Riffe']
   spec.email         = ['mel@juicyparts.com']
   spec.summary       = %q{Capistrano3 plugin with basic 'start', 'stop' commands for rpush.}
