@@ -16,7 +16,9 @@ class Capistrano::Rpush < Capistrano::Plugin
     set_if_empty :rpush_log,           -> { File.join(shared_path, 'log', 'rpush.log') }
     set_if_empty :rpush_pid,           -> { File.join(shared_path, 'tmp', 'pids', 'rpush.pid') }
 
+    append :chruby_map_bins, 'rpush'
     append :rbenv_map_bins, 'rpush'
+    append :rvm_map_bins, 'rpush'
     append :bundle_bins, 'rpush'
   end
 
