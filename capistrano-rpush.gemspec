@@ -6,8 +6,8 @@ require 'capistrano/rpush/version'
 Gem::Specification.new do |spec|
   spec.name          = 'capistrano-rpush'
   spec.version       = Capistrano::RpushPlugin::VERSION
-  spec.authors       = ['Mel Riffe']
-  spec.email         = ['mel@juicyparts.com']
+  spec.authors       = ['Mel Riffe', 'Cliff Braton']
+  spec.email         = ['mel@juicyparts.com', 'cliff.braton@gmail.com']
   spec.summary       = %q{Capistrano3 plugin with basic 'start', 'stop' commands for rpush.}
   spec.description   = %q{A set of Capistrano3 tasks to controll a deployed Rpush installation. The tasks include: restart, start, status, and stop.}
   spec.homepage      = 'http://juicyparts.com/capistrano-rpush'
