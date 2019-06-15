@@ -60,7 +60,7 @@ Or, to install the plugin without its hooks:
   # In Rails.root/Capfile
 
   require 'capistrano/rpush'
-  install_plugin Capistrano::RPush, load_hooks: false
+  install_plugin Capistrano::Rpush, load_hooks: false
 ```
 
 Now you can use cap -T to list tasks:
