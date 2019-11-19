@@ -48,7 +48,7 @@ namespace :rpush do
         if test "[ -f #{fetch(:rpush_conf)} ]"
           within current_path do
             with rack_env: fetch(:rpush_env) do
-              execute :rpush, "status -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
+              execute :rpush, "status -p #{fetch(:rpush_pid)} -c #{fetch(:rpush_conf)} -e #{fetch(:rpush_env)}"
             end
           end
         end
